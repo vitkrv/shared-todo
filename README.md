@@ -1,5 +1,5 @@
 # SharedList
-[![Build Status](https://travis-ci.org/vitkrv/shared-todo.svg?branch=master)](https://travis-ci.org/vitkrv/shared-todo)
+[![Build Status](https://travis-ci.org/vitkrv/shared-todo.svg?branch=master)](https://travis-ci.org/vitkrv/shared-todo) [![dependencies Status](https://david-dm.org/vitkrv/shared-todo/status.svg)](https://david-dm.org/vitkrv/shared-todo)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.2.1.
 
