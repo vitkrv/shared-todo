@@ -28,6 +28,19 @@ module.exports = function (config) {
     logLevel: config.LOG_INFO,
     autoWatch: true,
     browsers: ['Chrome'],
+    customLaunchers: {
+      Chrome_travis_ci: {
+        base: 'Chrome',
+        flags: ['--no-sandbox']
+      }
+    },
     singleRun: false
   });
+
+  if(process.env.TRAVIS) {
+    config.browsers = ['Chrome_travis_ci'];
+    config.autoWatch = false;
+    config.singleRun = true;
+    config.angularCli.environment = 'prod';
+  }
 };
