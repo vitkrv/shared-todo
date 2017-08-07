@@ -17,8 +17,10 @@ describe('CreateTodoComponent', () => {
   };
 
   const AngularFireDatabaseMocks = {
-    database: {
-      ref: jasmine.createSpy('ref')
+    app: {
+      database: () => {
+        return {ref: jasmine.createSpy('ref')};
+      }
     }
   };
 

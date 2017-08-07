@@ -19,7 +19,7 @@ export class CreateTodoComponent implements OnInit {
   createTodo() {
     // Generate token on the Firebase
     const timestamp = +new Date();
-    this.afDatabase.database
+    this.afDatabase.app.database()
       .ref('lists/' + timestamp)
       .set([
         {
