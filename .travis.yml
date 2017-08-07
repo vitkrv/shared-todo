@@ -22,5 +22,4 @@ before_script:
   - npm install -g @angular/cli
 
 script:
-  - ng test
-  - ng build --prod
+  - ng test && ng build --prod
