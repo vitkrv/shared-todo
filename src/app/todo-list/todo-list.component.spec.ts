@@ -5,6 +5,7 @@ import {AngularFireAuth} from 'angularfire2/auth';
 import {AngularFireDatabase} from 'angularfire2/database';
 
 import {TodoListComponent} from './todo-list.component';
+import {FormsModule} from '@angular/forms';
 
 describe('TodoListComponent', () => {
   let component: TodoListComponent;
@@ -34,6 +35,7 @@ describe('TodoListComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [TodoListComponent],
+      imports: [FormsModule],
       providers: [
         {
           provide: AngularFireAuth,
