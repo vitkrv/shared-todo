@@ -2,7 +2,7 @@ import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {Router} from '@angular/router';
 
 import {AngularFireAuth} from 'angularfire2/auth';
-import {AngularFireDatabase} from 'angularfire2/database';
+import {AngularFireDatabase} from 'angularfire2/database-deprecated';
 
 import {CreateTodoComponent} from './create-todo.component';
 
