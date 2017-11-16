@@ -1,4 +1,4 @@
 export class TodoItemModel {
-  constructor(public text = '') {
+  constructor(public text = '', public isChecked = false) {
   }
 }

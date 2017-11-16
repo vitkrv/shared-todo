@@ -13,7 +13,7 @@ import {TodoItemModel} from '../models/todo-item.model';
 export class TodoListComponent implements OnInit {
   listId: string;
   list: FirebaseListObservable<any[]>;
-  newItemText: string;
+  newItemText = '';
 
   constructor(public route: ActivatedRoute,
               public afAuth: AngularFireAuth,
@@ -30,9 +30,21 @@ export class TodoListComponent implements OnInit {
     );
   }
 
+  isEmptyText(value) {
+    return !value || !value.trim().length;
+  }
+
   addItem(text) {
+    if (this.isEmptyText(text)) {
+      return;
+    }
     this.list.push(new TodoItemModel(text))
       .then(() => this.newItemText = '');
+  }
+
+  checkItem(item) {
+    item.isChecked = !item.isChecked;
+    this.list.update(item.$key, item);
   }
 
   removeItem(item) {
