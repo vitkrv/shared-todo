@@ -2,7 +2,7 @@ import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {ActivatedRoute, Router} from '@angular/router';
 
 import {AngularFireAuth} from 'angularfire2/auth';
-import {AngularFireDatabase} from 'angularfire2/database-deprecated';
+import {AngularFireDatabase} from 'angularfire2/database';
 
 import {TodoListComponent} from './todo-list.component';
 import {FormsModule} from '@angular/forms';
@@ -10,11 +10,6 @@ import {FormsModule} from '@angular/forms';
 describe('TodoListComponent', () => {
   let component: TodoListComponent;
   let fixture: ComponentFixture<TodoListComponent>;
-  const AngularFireAuthMocks = {
-    auth: {
-      signInAnonymously: jasmine.createSpy('signInAnonymously')
-    }
-  };
 
   const AngularFireDatabaseMocks = {
     database: {
@@ -38,10 +33,6 @@ describe('TodoListComponent', () => {
       imports: [FormsModule],
       providers: [
         {
-          provide: AngularFireAuth,
-          useValue: AngularFireAuthMocks
-        },
-        {
           provide: AngularFireDatabase,
           useValue: AngularFireDatabaseMocks
         },
@@ -64,15 +55,7 @@ describe('TodoListComponent', () => {
     fixture.detectChanges();
   });
 
-  afterEach(function () {
-    AngularFireAuthMocks.auth.signInAnonymously.calls.reset();
-  });
-
   it('should be created', () => {
     expect(component).toBeTruthy();
-  });
-
-  it('should sign in as anonymous', () => {
-    expect(AngularFireAuthMocks.auth.signInAnonymously).toHaveBeenCalledTimes(1);
   });
 });

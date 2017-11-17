@@ -26,11 +26,12 @@
             </span>
               <input type="text"
                      class="form-control"
-                     (blur)="updateItem(item)"
+                     #updatetext
+                     (blur)="updateItem(item.key, {text: updatetext.value})"
                      [disabled]="item.isChecked"
-                     [(ngModel)]="item.text">
+                     [value]="item.text">
               <span class="input-group-btn">
-              <button type="button" class="btn btn-secondary ml-0" aria-label="Close" (click)="removeItem(item)">
+              <button type="button" class="btn btn-secondary ml-0" aria-label="Close" (click)="removeItem(item.key)">
                 <span aria-hidden="true">&times;</span>
               </button>
             </span>

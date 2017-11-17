@@ -1,19 +1,15 @@
-import {Component, OnInit} from '@angular/core';
-import {AngularFireDatabase} from 'angularfire2/database-deprecated';
-import {AngularFireAuth} from 'angularfire2/auth';
+import {Component} from '@angular/core';
+import {AngularFireDatabase} from 'angularfire2/database';
 import {Router} from '@angular/router';
+import {TodoItemModel} from '../models/todo-item.model';
 
 @Component({
   selector: 'app-create-todo',
   templateUrl: './create-todo.component.html',
   styleUrls: ['./create-todo.component.scss']
 })
-export class CreateTodoComponent implements OnInit {
-  constructor(public afAuth: AngularFireAuth, public afDatabase: AngularFireDatabase, public router: Router) {
-    this.afAuth.auth.signInAnonymously();
-  }
-
-  ngOnInit() {
+export class CreateTodoComponent {
+  constructor(public afDatabase: AngularFireDatabase, public router: Router) {
   }
 
   createTodo() {
@@ -21,11 +17,7 @@ export class CreateTodoComponent implements OnInit {
     const timestamp = +new Date();
     this.afDatabase.app.database()
       .ref('lists/' + timestamp)
-      .set([
-        {
-          text: 'Hi, I am your first ToDo.'
-        }
-      ]);
+      .set([new TodoItemModel('Hi, I am your first ToDo.')]);
 
     // Navigate to created list
     this.router.navigate(['/lists', timestamp]);

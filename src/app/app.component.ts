@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {AngularFireAuth} from 'angularfire2/auth';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Shared Todo';
+
+  constructor(public afAuth: AngularFireAuth) {
+    this.afAuth.auth.signInAnonymously();
+  }
 }

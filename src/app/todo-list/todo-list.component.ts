@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
+import {Observable} from 'rxjs/Observable';
+import {AngularFireDatabase, AngularFireList} from 'angularfire2/database';
 
-import {AngularFireDatabase, FirebaseListObservable} from 'angularfire2/database-deprecated';
-import {AngularFireAuth} from 'angularfire2/auth';
 import {TodoItemModel} from '../models/todo-item.model';
 
 @Component({
@@ -12,14 +12,13 @@ import {TodoItemModel} from '../models/todo-item.model';
 })
 export class TodoListComponent implements OnInit {
   listId: string;
-  list: FirebaseListObservable<any[]>;
+  list: Observable<TodoItemModel[]>;
+  listRef: AngularFireList<any>;
   newItemText = '';
 
   constructor(public route: ActivatedRoute,
-              public afAuth: AngularFireAuth,
               public afDatabase: AngularFireDatabase,
               public router: Router) {
-    this.afAuth.auth.signInAnonymously();
   }
 
   ngOnInit() {
@@ -38,27 +37,31 @@ export class TodoListComponent implements OnInit {
     if (this.isEmptyText(text)) {
       return;
     }
-    this.list.push(new TodoItemModel(text))
+    this.listRef.push(new TodoItemModel(text))
       .then(() => this.newItemText = '');
   }
 
   checkItem(item) {
-    item.isChecked = !item.isChecked;
-    this.list.update(item.$key, item);
+    this.updateItem(item.key, {isChecked: !item.isChecked});
   }
 
-  removeItem(item) {
-    this.list.remove(item);
+  updateItem(key, item) {
+    this.listRef.update(key, item);
   }
 
-  updateItem(item) {
-    this.list.update(item.$key, item);
+  removeItem(key) {
+    this.listRef.remove(key);
   }
 
   getData() {
-    this.list = this.afDatabase.list('lists/' + this.listId);
+    this.listRef = this.afDatabase.list<TodoItemModel[]>('lists/' + this.listId);
+    this.list = this.listRef
+      .snapshotChanges()
+      .map(changes => {
+        return changes.map(c => ({key: c.payload.key, ...c.payload.val()}));
+      });
 
-    this.list.$ref.once('value', (snapshot) => {
+    this.listRef.query.once('value', (snapshot) => {
       if (!snapshot.exists()) {
         this.router.navigate(['']);
       }
