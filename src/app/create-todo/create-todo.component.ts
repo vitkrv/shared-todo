@@ -1,6 +1,8 @@
 import {Component} from '@angular/core';
 import {AngularFireDatabase} from 'angularfire2/database';
 import {Router} from '@angular/router';
+
+import {TodoListModel} from '../models/todo-list.model';
 import {TodoItemModel} from '../models/todo-item.model';
 
 @Component({
@@ -14,12 +16,12 @@ export class CreateTodoComponent {
 
   createTodo() {
     // Generate token on the Firebase
-    const timestamp = +new Date();
+    const newList = new TodoListModel('Your ToDo list', [new TodoItemModel('Hi, I am your first ToDo.')]);
     this.afDatabase.app.database()
-      .ref('lists/' + timestamp)
-      .set([new TodoItemModel('Hi, I am your first ToDo.')]);
+      .ref('lists/' + newList.createdAt)
+      .set(newList);
 
-    // Navigate to created list
-    this.router.navigate(['/lists', timestamp]);
+    // Navigate to created listItems$
+    this.router.navigate(['/lists', newList.createdAt]);
   }
 }

@@ -54,7 +54,7 @@ export class TodoListComponent implements OnInit {
   }
 
   getData() {
-    this.listRef = this.afDatabase.list<TodoItemModel[]>('lists/' + this.listId);
+    this.listRef = this.afDatabase.list<TodoItemModel[]>('lists/' + this.listId + '/items');
     this.list = this.listRef
       .snapshotChanges()
       .map(changes => {
