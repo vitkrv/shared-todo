@@ -39,6 +39,7 @@ module.exports = function (config) {
 
   if(process.env.TRAVIS) {
     config.browsers = ['Chrome_travis_ci'];
+    config.reporters = ['progress', 'coverage-istanbul'];
     config.autoWatch = false;
     config.singleRun = true;
     config.angularCli.environment = 'prod';
