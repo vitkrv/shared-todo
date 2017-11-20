@@ -1,5 +1,5 @@
 # SharedList
-[![Build Status](https://travis-ci.org/vitkrv/shared-todo.svg?branch=master)](https://travis-ci.org/vitkrv/shared-todo) [![dependencies Status](https://david-dm.org/vitkrv/shared-todo/status.svg)](https://david-dm.org/vitkrv/shared-todo)
+[![Build Status](https://travis-ci.org/vitkrv/shared-todo.svg?branch=master)](https://travis-ci.org/vitkrv/shared-todo) [![dependencies Status](https://david-dm.org/vitkrv/shared-todo/status.svg)](https://david-dm.org/vitkrv/shared-todo) [![Coverage Status](https://coveralls.io/repos/github/vitkrv/shared-todo/badge.svg?branch=master)](https://coveralls.io/github/vitkrv/shared-todo?branch=master)
 
 
 ## Check out  [LIVE DEMO](https://shared-todo-9b23a.firebaseapp.com/)
